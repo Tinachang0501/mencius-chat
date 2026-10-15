@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content" />
+  <title>AI 古人聊天室｜與孟子對話</title>
+  <meta name="description" content="LINE 風格的孟子聊天室：自我介紹、得意作品、八卦趣聞、諸子朋友圈、友情考核與 AI 自由對話。" />
+  <link rel="icon" href="assets/avatar.jpg" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="phone" id="phone">
+    <!-- 頂部導航列 -->
+    <header class="topbar">
+      <img class="avatar" src="assets/avatar.jpg" alt="孟子頭像" />
+      <div class="who">
+        <div class="name">孟子 <span class="badge">亞聖</span></div>
+        <div class="meta"><span class="dot" id="statusDot"></span><span id="statusText">戰國・鄒國｜離線劇本模式</span></div>
+      </div>
+      <button class="ai-toggle" id="aiToggle" type="button" aria-pressed="false">🤖 AI 對話</button>
+    </header>
+
+    <!-- 中央訊息區 -->
+    <main class="messages" id="messages" aria-live="polite"></main>
+
+    <!-- 底部控制區 -->
+    <footer class="controls">
+      <div class="chips" id="chips">
+        <button type="button" class="chip" data-topic="intro">👦 自我介紹</button>
+        <button type="button" class="chip" data-topic="works">📜 得意作品</button>
+        <button type="button" class="chip" data-topic="gossip">🍵 八卦趣聞</button>
+        <button type="button" class="chip" data-topic="friends">👥 諸子朋友圈</button>
+        <button type="button" class="chip quiz" id="quizBtn">🏆 友情考核</button>
+      </div>
+      <form class="composer" id="composer" autocomplete="off">
+        <input id="input" type="text" placeholder="跟孟子說點什麼……" maxlength="300" enterkeyhint="send" />
+        <button type="submit" id="sendBtn" aria-label="送出">➤</button>
+      </form>
+    </footer>
+  </div>
+
+  <!-- AI 解鎖視窗 -->
+  <div class="modal" id="modal" hidden>
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <h2 id="modalTitle">開啟 AI 自由對話</h2>
+      <div class="tabs">
+        <button type="button" class="tab active" data-tab="code">🔑 課堂通關碼</button>
+        <button type="button" class="tab" data-tab="key">🧩 自備 API Key</button>
+      </div>
+
+      <section class="tab-panel" data-panel="code">
+        <p class="hint">請輸入老師提供的課堂通關碼。</p>
+        <input id="codeInput" type="text" inputmode="numeric" placeholder="例如：123456" />
+        <p class="hint small" id="proxyHint"></p>
+      </section>
+
+      <section class="tab-panel" data-panel="key" hidden>
+        <p class="hint">外校老師或自學者可填入自己的金鑰（只存在本分頁，關閉即清除）。</p>
+        <select id="providerSelect">
+          <option value="gemini">Google Gemini</option>
+          <option value="groq">Groq</option>
+        </select>
+        <input id="keyInput" type="password" placeholder="貼上 API Key" />
+      </section>
+
+      <p class="error" id="modalError"></p>
+      <div class="modal-actions">
+        <button type="button" class="btn ghost" id="modalCancel">取消</button>
+        <button type="button" class="btn primary" id="modalOk">解鎖</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app-data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
